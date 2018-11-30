@@ -37,12 +37,14 @@
                     },
                     "use_cdd=true&extra_fields=connectionStatus&q=&type=&connection_status=",
                 )
-                debugger
+                debugger                
                 console.log(res)
+                document.writeln(res)
             }
             catch (e) {
                 debugger
                 console.log(e)
+                document.writeln("erro, veja o console")
             }
         }
         setTimeout(cloudPrintSearch, 300)

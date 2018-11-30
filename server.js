@@ -14,4 +14,5 @@ expressvar.use(function (req, res, next) {
 // expressvar.use(cors());
 expressvar.use(express.static('./public'));
 var app = http.createServer(expressvar);
+console.log("iniciando servidor em http://localhost:8282/")
 app.listen(8282);
