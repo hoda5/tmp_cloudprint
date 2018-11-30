@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <script>
+        function post(url, withCredentials, headers, contentType, content) {
+            return new Promise((resolve, reject) => {
+                try {
+                    var http = new XMLHttpRequest();
+                    http.open('POST', url, true);
+
+                    http.withCredentials = withCredentials;
+                    Object.keys(headers).forEach((n) => {
+                        http.setRequestHeader(n, headers[n]);
+                    })
+
+                    http.onreadystatechange = () => {
+                        if (http.readyState == 4)
+                            if (http.status == 200) resolve(http.responseText);
+                            else reject(http)
+                    }
+                    http.onerror = () => {
+                        reject(http)
+                    }
+                    http.send(content);
+                } catch (e) {
+                    reject(e)
+                }
+            })
+        }
+        async function cloudPrintSearch() {
+            try {
+                const res = await post(
+                    "http://cors.io/?https://www.google.com/cloudprint/search", true,
+                    {
+                        'Content-type': "application/x-www-form-urlencoded",
+                        origin: "https://www.google.com",
+                    },
+                    "use_cdd=true&extra_fields=connectionStatus&q=&type=&connection_status=",
+                )
+                debugger
+                console.log(res)
+            }
+            catch (e) {
+                debugger
+                console.log(e)
+            }
+        }
+        setTimeout(cloudPrintSearch, 300)
+    </script>
+</head>
+
+<body>
+    OK
+</body>
+
+</html>
